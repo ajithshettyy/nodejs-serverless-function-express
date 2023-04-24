@@ -35,9 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success_url: "http://localhost:3000/success",
       cancel_url: "http://localhost:3000/cancel",
     });
-    // console.log(session);
-    res.json(customer);
-    // res.json({ id: session.id });
+    res.json({ id: session.id });
   } catch (err) {
     res.send(err);
   }
