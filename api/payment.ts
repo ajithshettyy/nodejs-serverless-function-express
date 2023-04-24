@@ -12,7 +12,7 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    const customer = await stripe.customer.create({
+    const customer = await stripe.customers.create({
       name: "test",
       email: "ajith.shettyy@gmail.com"
     });
