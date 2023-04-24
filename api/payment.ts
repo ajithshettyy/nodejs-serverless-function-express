@@ -12,9 +12,14 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
+    const {
+      name,
+      amount,
+      email,
+    } = req.body;
     const customer = await stripe.customers.create({
-      name: "test",
-      email: "ajith.shettyy@gmail.com"
+      name,
+      email
     });
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
@@ -25,7 +30,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             product_data: {
               name: "test payment",
             },
-            unit_amount: 1 * 100,
+            unit_amount: amount * 100,
           },
           quantity: 1,
         },
