@@ -20,7 +20,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .create({
         name,
         email,
-        source: STRIPE_SECRET_KEY
+        source: STRIPE_PUBLISHABLE_KEY
       })
       .then(customer =>
         stripe.charges.create({
