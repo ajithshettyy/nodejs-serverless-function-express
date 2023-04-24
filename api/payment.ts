@@ -11,11 +11,10 @@ const stripe = new Stripe(STRIPE_SECRET_KEY, {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { body } = req;
-  const {
-    name = "Ajith",
-    email = "ajith.shettyy@gmail.com",
-    amount = "1",
-  } = body;
+  const name = "Ajith";
+  const email =  "ajith.shettyy@gmail.com";
+  const amount = "1";
+  
   try {
     stripe.customers
       .create({
