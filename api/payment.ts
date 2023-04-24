@@ -13,14 +13,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { body } = req;
   const name = "Ajith";
   const email =  "ajith.shettyy@gmail.com";
-  const amount = "1";
+  const amount = 1;
   
   try {
     stripe.customers
       .create({
         name,
         email,
-        source: STRIPE_PUBLISHABLE_KEY
+        source: STRIPE_SECRET_KEY
       })
       .then(customer =>
         stripe.charges.create({
