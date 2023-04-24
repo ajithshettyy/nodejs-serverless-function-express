@@ -12,31 +12,32 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    // const customer = await stripe.customer.create({
-    //   name: "test",
-    //   email: "ajith.shettyy@gmail.com"
-    // });
-    // console.log(customer);
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: "test payment",
-            },
-            unit_amount: 1 * 100,
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+    const customer = await stripe.customer.create({
+      name: "test",
+      email: "ajith.shettyy@gmail.com"
     });
-    console.log(session);
-    res.json({ id: session.id });
+    // console.log(customer);
+    // const session = await stripe.checkout.sessions.create({
+    //   payment_method_types: ["card"],
+    //   line_items: [
+    //     {
+    //       price_data: {
+    //         currency: "inr",
+    //         product_data: {
+    //           name: "test payment",
+    //         },
+    //         unit_amount: 1 * 100,
+    //       },
+    //       quantity: 1,
+    //     },
+    //   ],
+    //   mode: "payment",
+    //   success_url: "http://localhost:3000/success",
+    //   cancel_url: "http://localhost:3000/cancel",
+    // });
+    // console.log(session);
+    res.json(customer);
+    // res.json({ id: session.id });
   } catch (err) {
     res.send(err);
   }
