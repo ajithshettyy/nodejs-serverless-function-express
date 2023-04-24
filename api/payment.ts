@@ -12,11 +12,11 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    const customer = await stripe.customer.create({
-      name: "test",
-      email: "ajith.shettyy@gmail.com"
-    });
-    console.log(customer);
+    // const customer = await stripe.customer.create({
+    //   name: "test",
+    //   email: "ajith.shettyy@gmail.com"
+    // });
+    // console.log(customer);
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
