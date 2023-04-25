@@ -1,10 +1,8 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
-
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   try {
     const transactions = await stripe.balanceTransactions.list(
       {
