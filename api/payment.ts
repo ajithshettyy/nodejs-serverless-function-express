@@ -1,14 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
-const STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
 
 const stripe = require("stripe")(STRIPE_SECRET_KEY);
-// import Stripe from "stripe";
-// const stripe = new Stripe(STRIPE_SECRET_KEY, {
-//   apiVersion: "2022-11-15",
-//   typescript: true,
-// });
+
+const API_BASE = "https://nodejs-serverless-function-express-psi-two.vercel.app/api/"
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
@@ -37,8 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ],
       customer: customer.id,
       mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/cancel",
+      success_url: `${API_BASE}/sucess`
     });
     res.json({ id: session.id });
   } catch (err) {
