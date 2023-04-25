@@ -1,3 +1,3 @@
 export default function handler(req, res) {
-  return res.sendFile(__dirname + "/api/view/success.html");
+  return res.redirect(302, "https://react-payment-app.vercel.app/")
 }
