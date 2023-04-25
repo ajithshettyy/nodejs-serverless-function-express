@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       status: dt.status,
       amount: dt.amount / 100,
     }));
-    return res.json({ data: transactionData | [] });
+    return res.json({ data: data | [] });
   } catch (err) {
     res.send(err);
   }
