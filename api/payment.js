@@ -1,40 +1,35 @@
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
-const stripe = require("stripe")(STRIPE_SECRET_KEY);
+const Stripe = require("stripe");
 
-const API_BASE = "https://nodejs-serverless-function-express-psi-two.vercel.app/api/"
+const API_BASE =
+  "https://nodejs-serverless-function-express-psi-two.vercel.app/api/";
 
 export default async function handler(req, res) {
-  try {
-    const {
-      name,
-      amount,
-      email,
-    } = req.body;
-    const customer = await stripe.customers.create({
-      name,
-      email
-    });
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [
-        {
-          price_data: {
-            currency: "inr",
-            product_data: {
-              name: "test payment",
-            },
-            unit_amount: amount * 100,
+  const { name, amount, email } = req.body;
+  if (!STRIPE_SECRET_KEY) throw new Error("Payment Secret Not set");
+  const stripe = Stripe(STRIPE_SECRET_KEY);
+  const customer = await stripe.customers.create({
+    name,
+    email,
+  });
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    line_items: [
+      {
+        price_data: {
+          currency: "inr",
+          product_data: {
+            name: "test payment",
           },
-          quantity: 1,
+          unit_amount: amount * 100,
         },
-      ],
-      customer: customer.id,
-      mode: "payment",
-      success_url: `${API_BASE}/success`
-    });
-    res.json({ id: session.id });
-  } catch (err) {
-    res.send(err);
-  }
+        quantity: 1,
+      },
+    ],
+    customer: customer.id,
+    mode: "payment",
+    success_url: `${API_BASE}/success`,
+  });
+  res.json({ id: session.id });
 }
