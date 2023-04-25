@@ -8,8 +8,12 @@ const API_BASE = "https://nodejs-serverless-function-express-psi-two.vercel.app/
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
-    const transactions = await stripe.issuing.tranactions();
-    res.json(transactions);
+    const transactions = await stripe.balanceTransactions.list(
+      {
+        limit: 100,
+      },
+    )
+    return res.json(transactions);
   } catch (err) {
     res.send(err);
   }

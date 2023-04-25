@@ -33,7 +33,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       ],
       customer: customer.id,
       mode: "payment",
-      success_url: `${API_BASE}/sucess`
+      success_url: `${API_BASE}/success`
     });
     res.json({ id: session.id });
   } catch (err) {
