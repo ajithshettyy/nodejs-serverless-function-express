@@ -15,4 +15,12 @@ describe("Payment serverless function", () => {
       expect(error).toBeInstanceOf(Error);
     }
   });
+
+  it("payment fn should throw errror if request body not set", async () => {
+    try {
+      await payment({});
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+    }
+  });
 });
