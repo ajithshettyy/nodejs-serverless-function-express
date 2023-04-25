@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     });
     const transactionData = data.map((dt) => ({
       id: dt.id,
-      created: new Date(dt.created * 1000).toLocaleString(),
+      created: new Date(dt.created * 1000),
       status: dt.status,
       amount: dt.amount / 100,
     }));
