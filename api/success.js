@@ -5,5 +5,4 @@ export default function handler(req, res) {
  <h1>Payment Successful</h1>
  Go back to <a href="${APP_LINK}">App</a>
  </div>`);
-  //return res.redirect(302, "https://react-payment-app.vercel.app/")
 }

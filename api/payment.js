@@ -2,6 +2,7 @@ const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
 const Stripe = require("stripe");
 
+// Set this as env
 const API_BASE =
   "https://nodejs-serverless-function-express-psi-two.vercel.app/api/";
 
