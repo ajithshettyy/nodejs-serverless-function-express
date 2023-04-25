@@ -4,12 +4,16 @@ const stripe = require("stripe")(STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   try {
-    const transactions = await stripe.balanceTransactions.list(
-      {
-        limit: 100,
-      },
-    )
-    return res.json(transactions);
+    const { data } = await stripe.balanceTransactions.list({
+      limit: 100,
+    });
+    const transactionData = data.map((dt) => ({
+      id: dt.id,
+      created: new Date(dt.created * 1000).toLocaleString(),
+      status: dt.status,
+      amount: dt.amount / 100,
+    }));
+    return res.json({ data: transactions | [] });
   } catch (err) {
     res.send(err);
   }
