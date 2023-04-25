@@ -6,6 +6,12 @@ Simple Node.js + Vercel example that returns a "Hello World" response.
 
 You can choose from one of the following two methods to use this repository:
 
+## Run test
+
+`` 
+npm run test
+``
+
 ### One-Click Deploy
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
